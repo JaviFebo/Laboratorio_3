@@ -38,15 +38,37 @@ int sumar_diagSec (int matriz[SIZE][SIZE]) {
 
 	for (int i = 0, j = SIZE-1; i < SIZE; i++, j--) {
 		suma = suma + matriz[i][j];
-		printf ("i = %d\n", i);
-		printf ("j = %d\n", j);
-		printf ("m[i][j] = %d\n", matriz[i][j]);
-		printf ("Suma = %d\n", suma);
 	}
 
 	return suma;
 }
 
+int es_cuadradoMagico (int matriz[SIZE][SIZE]) {
+	int suma_magica = sumar_linea (matriz, 0);
+
+	for (int i = 0; i < SIZE; i++) {
+		int suma_linea_i = sumar_linea (matriz, i);
+		if (suma_linea_i != suma_magica) {
+			return 0;
+		}
+	}
+
+	for (int j = 0; j < SIZE; j++) {
+		int suma_col_j = sumar_columna (matriz, j);
+		if (suma_col_j != suma_magica) {
+			return 0;
+		}
+	}
+
+	int suma_diag_prim = sumar_diagPrim (matriz);
+	int suma_diag_sec = sumar_diagSec (matriz);
+
+	if (suma_diag_prim != suma_magica || suma_diag_sec != suma_magica) {
+		return 0;
+	}
+
+	return 1;
+}
 
 int main () {
 	int matriz [SIZE][SIZE] = {
@@ -55,16 +77,11 @@ int main () {
 		{4, 3, 8}
 	};
 	
-
-	int suma_linea = sumar_linea (matriz, 0);
-	int suma_columna = sumar_columna (matriz, 0);
-	int suma_diagPrim = sumar_diagPrim (matriz);
-	int suma_diagSec = sumar_diagSec (matriz);
-
-	printf ("La suma de la línea 1 es: %d\n", suma_linea);
-	printf ("La suma de la columna 1 es: %d\n", suma_columna);
-	printf ("La suma de la diagonal primaria es: %d\n", suma_diagPrim);
-	printf ("La suma de la diagonal secundaria es: %d\n", suma_diagSec);
+	if (es_cuadradoMagico(matriz)) {
+		printf ("La matriz es un cuadrado mágico\n");
+	} else {
+		printf ("La matriz no es un cuadrado mágico\n");
+	}
 
 	return 0;
 }
