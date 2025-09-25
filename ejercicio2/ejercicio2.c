@@ -70,6 +70,16 @@ int es_cuadradoMagico (int matriz[SIZE][SIZE]) {
 	return 1;
 }
 
+int imprimir_matriz (int matriz [SIZE][SIZE]) {
+	for (int i = 0; i < SIZE; ++i) {
+		for (int j = 0; j < SIZE; ++j) {
+			printf (" %d ", matriz[i][j]);
+		}
+		printf ("\n");
+	}
+	return 0;
+}
+
 int main () {
 	int matriz [SIZE][SIZE] = {
 		{2, 7, 6},
@@ -77,6 +87,9 @@ int main () {
 		{4, 3, 8}
 	};
 	
+	printf ("La matriz utilizada fue:\n");
+	imprimir_matriz (matriz);
+
 	if (es_cuadradoMagico(matriz)) {
 		printf ("La matriz es un cuadrado mágico\n");
 	} else {
